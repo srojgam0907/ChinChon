@@ -35,6 +35,6 @@ public class Card implements Comparable<Card>{
 
 	@Override
 	public String toString() {
-		return value + " de " + suit.toString();  
+		return String.format("%d %s", value.getNumValue(), suit.getEmoji()); 
 	}
 }
