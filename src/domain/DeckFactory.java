@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 
-public class CardFactory {
+public class DeckFactory {
 
 	public static Deque<Card> createFullDeck(int numberOfDecks) {
 		List<Card> cards= new ArrayList<>();

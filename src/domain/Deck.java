@@ -10,7 +10,7 @@ public class Deck {
 	private Deque<Card> cards;
 	
 	public Deck(int numberOfDecks) {
-		this.cards= CardFactory.createFullDeck(numberOfDecks);
+		this.cards= DeckFactory.createFullDeck(numberOfDecks);
 	}
 	
 	public Optional<Card> drawCard() {
