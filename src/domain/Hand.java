@@ -13,6 +13,10 @@ public class Hand {
 
 	private List<Card> cards;
 	
+	/**
+	 * Constructor de la clase Hand
+	 * Crea una lista vacia de cartas.
+	 */
 	public Hand() {
 		cards= new ArrayList<>();
 	}
@@ -44,13 +48,13 @@ public class Hand {
 	
 	/**
      * Calcula la puntuación total de las cartas que NO están combinadas.
-     * Según las reglas, los puntos coinciden con el valor nominal de la carta[cite: 55].
+     * @param uncombinedCards Lista de cartas sueltas seleccionadas.
      * @return Suma de puntos de las cartas sueltas.
      */
-	public int calculateTotalPoints() {
+	public int calculateTotalPoints(List<Card> UncombinedCards) {
 		int total= 0;
 		
-		for(Card card : cards) {
+		for(Card card : UncombinedCards) { 
 			total += card.getPoints();
 		}
 		
@@ -68,7 +72,7 @@ public class Hand {
 		
 		sortHand();
 		
-		for(int i= 0; i < cards.size() -1; i++) {
+		for(int i= 0; i < 6; i++) {
 			Card current= cards.get(i);
 			Card next= cards.get(i +1);
 			
@@ -98,6 +102,15 @@ public class Hand {
     }
     
     /**
+     * Devuelve una copia de las cartas para que el validador
+     * pueda analizarlas sin modificar la mano original.
+     * @return lista de cartas
+     */
+    public List<Card> getCards() {
+        return new ArrayList<>(cards);
+    }
+    
+    /**
      * Devuelve una representación visual de la mano para la consola.
      * @return Cadena con las cartas numeradas.
      */
@@ -105,7 +118,7 @@ public class Hand {
     public String toString() {
         StringBuilder sb = new StringBuilder("Tu mano:\n");
         for (int i = 0; i < cards.size(); i++) {
-            sb.append(String.format("%s  ", i, cards.get(i)));
+            sb.append(String.format("%s  ", cards.get(i))); 
         }
         return sb.toString();
     }
