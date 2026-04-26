@@ -4,10 +4,17 @@ import java.util.*;
 public class ConsoleInput {
 
 	private Scanner kb;
-
+	private static ConsoleInput instance;
 	
-    public ConsoleInput(Scanner keyboard) {
-        this.kb = keyboard;
+    private ConsoleInput(Scanner keyboard) {
+    	kb= keyboard; 
+    }
+    
+    public static ConsoleInput getInstance(Scanner keyboard) {
+    	if(instance == null) {
+    		instance= new ConsoleInput(keyboard);
+    	}
+    	return instance; 
     }
     
     private void cleanInput() { //Limpiar el buffer
