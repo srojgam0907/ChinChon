@@ -127,18 +127,17 @@ public class ConsoleInput {
     	int numInt= 0;
     	boolean error= false;
 		do {
-			System.out.printf("Introduce un numero entre %d y %d, ", lowerBound, upperBound);
 			numInt = readInt();
 
 			if (numInt < lowerBound || numInt > upperBound) {
-				System.out.println("ERROR, numero fuera de rango");
+				System.out.printf("ERROR, numero fuera de rango. Introduce un numero entre %d y %d", lowerBound, upperBound);
 				error = true;
 				
 			} else {
 				error= false;
 			}
 
-		} while (error);
+		} while(error);
     	
     	return numInt; 
     }
