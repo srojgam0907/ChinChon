@@ -118,7 +118,7 @@ public class Hand {
     public String toString() {
         StringBuilder sb = new StringBuilder("Tu mano:\n");
         for (int i = 0; i < cards.size(); i++) {
-            sb.append(String.format("[%d] %s  ", i+1, cards.get(i))); 
+            sb.append(String.format("[%d] %s, ", i+1, cards.get(i))); 
         }
         return sb.toString();
     }
