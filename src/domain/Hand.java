@@ -42,7 +42,7 @@ public class Hand {
      * Ordena las cartas de la mano utilizando el criterio definido en la clase Card.
      * Facilita la visualización y la creación de combinaciones por parte del jugador.
      */
-	public void sortHand() {
+	public void sortHand() { 
 		Collections.sort(cards);
 	}
 	
@@ -60,29 +60,6 @@ public class Hand {
 		
 		return total;
 	} 
-	
-	/**
-     * Verifica si el jugador tiene un Chinchón (7 cartas consecutivas del mismo palo).
-     * @return true si se cumple la condición de Chinchón.
-     */
-	public boolean hasChinchon() {
-		if(cards.size() < 7) {
-			return false;
-		}
-		
-		sortHand();
-		
-		for(int i= 0; i < 6; i++) {
-			Card current= cards.get(i);
-			Card next= cards.get(i +1);
-			
-			if(current.getSuit() != next.getSuit() || next.getValue().getNumValue() != current.getValue().getNumValue() + 1) {
-				return false;
-			}
-		}
-		
-		return true; 
-	}
 	
 	/**
      * Devuelve el número actual de cartas en la mano.
@@ -108,6 +85,48 @@ public class Hand {
      */
     public List<Card> getCards() {
         return new ArrayList<>(cards);
+    }
+    
+    /**
+     * Verifica si la mano actual (que debe tener 8 cartas tras robar) permite cerrar.
+     * @return true si es valido o false si no puede cerrar 
+     */
+    public boolean canClose() {
+    	List<Card> currentCards= getCards();
+    	
+    	for(int i=0; i< currentCards.size(); i++) {
+    		List<Card> tempHand= new ArrayList<>(currentCards);
+    		Card candidateToDiscard= tempHand.remove(i);
+    		
+    		if(isValidClosingHand(tempHand, candidateToDiscard)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false; 
+    }
+    
+    /**
+     * Determina si una configuración de cartas es válida para finalizar la ronda.
+     * @param cards La lista de 7 cartas que se van a evaluar.
+     * @param lastCard La carta que el jugador ha decidido soltar para cerrar.
+     * @return close True si la combinación permite cerrar la ronda, false en caso contrario.
+     */
+    public boolean isValidClosingHand(List<Card> cards, Card lastCard) {
+    	int uncombinedPoints;
+    	
+    	if(CombinationChecker.isChinchon(cards)) {
+    		return true;
+    	}
+    	
+    	uncombinedPoints= CombinationChecker.calculateUncombinedPoints(cards);
+    	
+    	if(uncombinedPoints <= 5) {
+    		return true;
+    		
+    	} else { 
+    		return false;
+    	}
     }
     
     /**
