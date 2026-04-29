@@ -47,21 +47,6 @@ public class Hand {
 	}
 	
 	/**
-     * Calcula la puntuación total de las cartas que NO están combinadas.
-     * @param uncombinedCards Lista de cartas sueltas seleccionadas.
-     * @return Suma de puntos de las cartas sueltas.
-     */
-	public int calculateTotalPoints(List<Card> UncombinedCards) {
-		int total= 0;
-		
-		for(Card card : UncombinedCards) { 
-			total += card.getPoints();
-		}
-		
-		return total;
-	} 
-	
-	/**
      * Devuelve el número actual de cartas en la mano.
      * @return Cantidad de cartas.
      */
