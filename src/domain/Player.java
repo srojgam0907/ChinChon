@@ -10,6 +10,7 @@ public abstract class Player {
 	  protected String name;
 	  protected Hand hand;
 	  protected int totalScore;
+	  protected boolean hasClosed;
 	  
 	  /**
 	   * Constructor base para cualquier jugador.
@@ -19,6 +20,23 @@ public abstract class Player {
 		  this.name= name;
 		  hand= new Hand();
 		  totalScore= 0;
+		  hasClosed= false;
+	  }
+	  
+	  /**
+	   * True si ha cerrado, false si no ha cerrado
+	   * @return estado de cierre del jugador
+	   */
+	  public boolean hasClosed() {
+		  return hasClosed;
+	  }
+	  
+	  /**
+	   * Cambia el estado de cerrado del jugador
+	   * @param hasClosed 
+	   */
+	  public void setHasClosed(boolean hasClosed) {
+		  this.hasClosed= hasClosed;
 	  }
 	  
 	  /**
