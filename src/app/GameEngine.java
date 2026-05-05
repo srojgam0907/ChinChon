@@ -25,13 +25,14 @@ public class GameEngine {
 		this.players= players;
 		currentPlayerIndex= 0;
 		gameOver= false;
-		ci= ConsoleInput.getInstance(null);
+		ci= ConsoleInput.getInstance(null); 
 	}
 	
 	/**
      * Reparte 7 cartas a cada jugador y pone la primera en el descarte.
      */
 	public void setUpGame() {
+		System.out.println("Repartiendo cartas...");
 		for(Player p : players) {
 			for(int i=0; i<7; i++) {
 				deck.drawCard().ifPresent(card -> p.getHand().addCard(card));
@@ -46,7 +47,7 @@ public class GameEngine {
 	 */
 	private void checkDeckStatus() {
 		if(deck.isEmpty()) {
-			System.out.println("\nMazo vacío. Barajando la pila de descartes");
+			System.out.println("\nMazo vacío. Barajando la pila de descartes...");
 			List<Card> recycledCards= discardPile.collectAllButLast();
 			deck.refillFromDiscardPile(recycledCards);
 		}
@@ -69,14 +70,39 @@ public class GameEngine {
 	 * la puntuación de cada uno.
 	 */
 	public void finish() {
+		int points;
 		
+		System.out.print("\n//////////// FIN DE LA RONDA ////////////\n");
+		
+		for(Player p: players) {
+			points= CombinationChecker.calculateUncombinedPoints(p.getHand().getCards());
+			System.out.printf("\nJugador %s: %d puntos en cartas sueltas.\n", p.getName(), points);
+		}
+		
+		showWinner();
 	}
 	
 	/**
-	 * Informa de quién es el ganador de la ronda.
+	 * Informa de quién es el ganador de la ronda, según quién sea el
+	 * que tiene la menor cantidad de puntos.
 	 */
 	public void showWinner() {
+		Player winner= players.get(0);
+		Player p;
+		int minPoints= CombinationChecker.calculateUncombinedPoints(winner.getHand().getCards());
+		int actualPoints;
 		
+		for(int i=0; i<players.size(); i++) {
+			p= players.get(i);
+			actualPoints= CombinationChecker.calculateUncombinedPoints(p.getHand().getCards());
+			
+			if(actualPoints < minPoints) {
+				minPoints= actualPoints;
+				winner= p;
+			}
+		}
+		
+		System.out.printf("\n------------------------------\n¡EL GANADOR ES %s CON %d PUNTOS!\n------------------------------\n", winner.getName().toUpperCase(), minPoints);
 	}
 	
 	/**
@@ -85,29 +111,39 @@ public class GameEngine {
 	 */
 	public void startGame() {
 		Player currentPlayer;
-		boolean close;
+		boolean close; 
+		int turnCounter= 0;
 		
-		System.out.println("¡COMENCEMOS!");
+		System.out.println("¡COMENCEMOS LA PARTIDA!");
 		
 		while(!gameOver) {
 			currentPlayer= players.get(currentPlayerIndex);
 			
 			currentPlayer.playTurn(deck, discardPile);
 			
-			checkDeckStatus();
-			
-			if(currentPlayer instanceof HumanPlayer && !gameOver) {
-				System.out.printf("\n%s, ¿Quieres cerrar la ronda? s/n\n", currentPlayer.getName());
-				close= ci.readBooleanUsingChar('s', 'n');
-				
-				if(close) {
-					System.out.printf("\n==============================\n%s HA CERRADO LA RONDA\n==============================\n");
-					gameOver= true;
+			if (turnCounter >= players.size()) { //no se puede cerrar en la primera ronda
+				if (currentPlayer.getHand().canClose()) {
+					if (currentPlayer instanceof HumanPlayer && !gameOver) {
+						System.out.printf("\n%s, ¿Quieres cerrar la ronda? s/n\n", currentPlayer.getName());
+						close = ci.readBooleanUsingChar('s', 'n');
+
+						if (close) {
+							System.out.printf("\n==============================\n%s HA CERRADO LA RONDA\n==============================\n",currentPlayer.getName());
+							gameOver = true;
+						}
+
+					} else { //Si la IA puede cerrará automáticamente
+						gameOver = true;
+						System.out.printf("\n==============================\nIA %s HA CERRADO LA RONDA\n==============================\n",currentPlayer.getName());
+					}
 				}
 			}
 			
 			if(!gameOver) {
+				checkDeckStatus();
 				nextTurn();
+				turnCounter++;
+				System.out.print("\nEMPEZANDO LA SIGUIENTE RONDA\n");
 			}
 		}
 		
