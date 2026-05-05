@@ -11,7 +11,6 @@ public class HumanPlayer extends Player{
 
 	private Scanner kb= new Scanner(System.in);
 	private ConsoleInput ci= ConsoleInput.getInstance(kb);
-	private boolean hasClosed;
 	
 	/**
 	 * Constructor del jugador humano
@@ -19,15 +18,6 @@ public class HumanPlayer extends Player{
 	 */
 	public HumanPlayer(String name) {
 		super(name);
-		hasClosed= false;
-	}
-
-	/**
-	 * True si ha cerrado, false si no ha cerrado
-	 * @return estado de cierre del jugador
-	 */
-	public boolean isHasClosed() {
-		return hasClosed;
 	}
 
 	@Override
@@ -44,21 +34,21 @@ public class HumanPlayer extends Player{
         hand.sortHand();
         System.out.printf("\nHas robado. Tu mano actual es: %s\n", hand.toString());
         
-        //DESCARTE o CIERRE
-        if(hand.canClose()) {
-        	System.out.print("\n¡Puedes cerrar¡ ¿Quieres cerrar? [S/N]: ");
-        	
-        	if(ci.readBooleanUsingChar('s', 'n')) {
-        		executeCloseDiscard(discardPile);
-        		
-        	} else {
-        		executeNormalDiscard(discardPile);
-        		
-        	}
-        	
-        } else {
-        	executeNormalDiscard(discardPile); 
-        }
+		// DESCARTE o CIERRE
+		if (hand.canClose()) {
+			System.out.print("\n¡Puedes cerrar¡ ¿Quieres cerrar? [S/N]: ");
+
+			if (ci.readBooleanUsingChar('s', 'n')) {
+				executeCloseDiscard(discardPile);
+
+			} else {
+				executeNormalDiscard(discardPile);
+
+			} 
+
+		} else {
+			executeNormalDiscard(discardPile);
+		}
 	}
 	
 	/**
