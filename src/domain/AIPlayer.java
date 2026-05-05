@@ -19,6 +19,7 @@ public class AIPlayer extends Player{
 		Card topDiscard;
 		int actualPoints;
 		int discardPoints;
+		int finalPoints;
 		
 		System.out.printf("\n>>>TURNO DE LA IA: %s\n", name); 
 		
@@ -67,6 +68,16 @@ public class AIPlayer extends Player{
 		
 		System.out.printf("IA %s ha descartado: %s\n", name, toDiscard);
 		hand.sortHand();
+		
+		//CERRADO
+		if(hand.canClose()) {
+			finalPoints= CombinationChecker.calculateUncombinedPoints(hand.getCards());
+			
+			if(finalPoints <= 3) {
+				hasClosed= true;
+				System.out.printf("\nIA %s ha cerrado la ronda\n", name);
+			}
+		}
 	}
 	
 	/**
