@@ -13,7 +13,6 @@ public class GameEngine {
 	private List<Player> players;
 	private int currentPlayerIndex;
 	private boolean gameOver;
-	private ConsoleInput ci;
 	
 	/**
      * @param numberOfDecks Cantidad de barajas (1 o 2).
@@ -25,7 +24,6 @@ public class GameEngine {
 		this.players= players;
 		currentPlayerIndex= 0;
 		gameOver= false;
-		ci= ConsoleInput.getInstance(null); 
 	}
 	
 	/**
@@ -110,33 +108,24 @@ public class GameEngine {
 	 * Controla el flujo de la partida.
 	 */
 	public void startGame() {
-		Player currentPlayer;
-		boolean close; 
+		Player currentPlayer; 
 		int turnCounter= 0;
+		int round= 1;
 		
 		System.out.println("¡COMENCEMOS LA PARTIDA!");
 		
 		while(!gameOver) {
 			currentPlayer= players.get(currentPlayerIndex);
 			
+			if(currentPlayerIndex == 0) {
+				System.out.printf("\nRONDA %d", round); 
+			}
+			
 			currentPlayer.playTurn(deck, discardPile);
 			
-			if (turnCounter >= players.size()) { //no se puede cerrar en la primera ronda
-				if (currentPlayer.getHand().canClose()) {
-					if (currentPlayer instanceof HumanPlayer && !gameOver) {
-						System.out.printf("\n%s, ¿Quieres cerrar la ronda? s/n\n", currentPlayer.getName());
-						close = ci.readBooleanUsingChar('s', 'n');
-
-						if (close) {
-							System.out.printf("\n==============================\n%s HA CERRADO LA RONDA\n==============================\n",currentPlayer.getName());
-							gameOver = true;
-						}
-
-					} else { //Si la IA puede cerrará automáticamente
-						gameOver = true;
-						System.out.printf("\n==============================\nIA %s HA CERRADO LA RONDA\n==============================\n",currentPlayer.getName());
-					}
-				}
+			if (turnCounter >= players.size() && currentPlayer.hasClosed()) { //no se puede cerrar en la primera ronda
+				System.out.printf("\n %s ha cerrado la ronda\n", currentPlayer.getName());
+				gameOver= true;
 			}
 			
 			if(!gameOver) {
@@ -144,6 +133,10 @@ public class GameEngine {
 				nextTurn();
 				turnCounter++;
 				System.out.print("\nEMPEZANDO LA SIGUIENTE RONDA\n");
+			}
+			
+			if(currentPlayerIndex == 0) {
+				round++;
 			}
 		}
 		
