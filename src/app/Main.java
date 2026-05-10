@@ -12,6 +12,10 @@ public class Main {
 
 	}
 	
+	/**
+     * Gestiona el ciclo de vida del GameEngine: 
+     * configuración, preparación de cartas y comienzo de la partida.
+     */
 	public void game() {
 		System.out.println("******************************************");
 		System.out.println("      BIENVENIDO AL JUEGO DEL CHINCHÓN    ");
