@@ -1,5 +1,10 @@
 package app;
 
+/**
+ * Punto de entrada principal de la aplicación del juego del Chinchón.
+ * Esta clase se encarga de arrancar el entorno del programa y ceder el control
+ * al motor del juego.
+ */
 public class Main {
 
 	public static void main(String[] args) {
