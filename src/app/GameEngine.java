@@ -177,13 +177,15 @@ public class GameEngine {
 			
 			if(turnCounter < players.size()-1) {
 				System.out.print("\nEMPEZANDO EL SIGUIENTE TURNO\n");
+				
+			} else {
+				System.out.print("\nEMPEZANDO LA SIGUIENTE RONDA\n");
 			}
 			
 			if(!gameOver) {
 				checkDeckStatus();
 				nextTurn();
 				turnCounter++;
-				System.out.print("\nEMPEZANDO LA SIGUIENTE RONDA\n");
 			}
 			
 			if(currentPlayerIndex == 0) {

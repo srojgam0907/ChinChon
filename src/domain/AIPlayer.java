@@ -21,7 +21,7 @@ public class AIPlayer extends Player{
 		int discardPoints;
 		int finalPoints;
 		
-		System.out.printf("\n>>>TURNO DE LA IA: %s\n", name); 
+		System.out.printf("\n>>> TURNO DE: %s\n", name); 
 		
 		//ROBO
 		if(!discardPile.isEmpty()) {
@@ -34,14 +34,14 @@ public class AIPlayer extends Player{
 			
 			if(discardPoints < actualPoints) {
 				discardPile.takeCard().ifPresent(hand::addCard);
-				System.out.printf("IA %s ha robado del descarte\n", name);
+				System.out.printf("%s ha robado del descarte\n", name);
 				tookDiscard= true;
 			}
 		}
 		
 		if(!tookDiscard) {
 			deck.drawCard().ifPresent(hand::addCard);
-			System.out.printf("IA %s ha robado del mazo\n", name);
+			System.out.printf("%s ha robado del mazo\n", name);
 		}
 		
 		//DESCARTE
@@ -66,7 +66,7 @@ public class AIPlayer extends Player{
 		toDiscard= hand.discardCard(bestDiscardIndex);
 		discardPile.pushCard(toDiscard); 
 		
-		System.out.printf("IA %s ha descartado: %s\n", name, toDiscard);
+		System.out.printf("%s ha descartado: %s\n", name, toDiscard);
 		hand.sortHand();
 		
 		//CERRADO
@@ -75,7 +75,7 @@ public class AIPlayer extends Player{
 			
 			if(finalPoints <= 3) {
 				hasClosed= true;
-				System.out.printf("\nIA %s ha cerrado la ronda\n", name);
+				System.out.printf("\n%s ha cerrado la ronda\n", name);
 			}
 		}
 	}

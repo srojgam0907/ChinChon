@@ -22,7 +22,7 @@ public class HumanPlayer extends Player{
 
 	@Override
 	public void playTurn(Deck deck, DiscardPile discardPile) {
-		System.out.printf("\n====== TURNO DE: %s ======\n", name); 
+		System.out.printf("\n>>> TURNO DE: %s\n\n", name); 
 		
 		//ESTADO ACTUAL
         System.out.println(discardPile.toString());
@@ -32,7 +32,7 @@ public class HumanPlayer extends Player{
         //ROBO
         executeDrawn(deck, discardPile);
         hand.sortHand();
-        System.out.printf("\nHas robado. Tu mano actual es: %s\n", hand.toString());
+        System.out.printf("\nHas robado. %s\n", hand.toString());
         
 		// DESCARTE o CIERRE
 		if (hand.canClose()) {
@@ -59,7 +59,7 @@ public class HumanPlayer extends Player{
 		boolean choice;
 		
         while(!drawn) {
-        	System.out.println("¿Robas del [D]escarte o del [M]azo?:");
+        	System.out.print("\n¿Robas del [D]escarte o del [M]azo?: ");
         	choice= ci.readBooleanUsingChar('d', 'm'); //d = true, m = false
         	
         	if(choice) {
@@ -68,7 +68,7 @@ public class HumanPlayer extends Player{
         			drawn= true;
         		
         		} else {
-        			System.out.println("La pila de descartes está vacía. Por favor elije el mazo");
+        			System.out.println("\nLa pila de descartes está vacía. Por favor elije el mazo");
         		}
         		
         	} else {
@@ -101,7 +101,7 @@ public class HumanPlayer extends Player{
 		int cardPosition;
 		Card card;
 		
-		System.out.println("Selecciona la carta que vas a soltar (según su numero de posicion): ");
+		System.out.println("\nSelecciona la carta que vas a soltar (según su numero de posicion): ");
 		cardPosition= ci.readIntInRange(1, hand.size());
 		
 		card= hand.discardCard(cardPosition -1);
