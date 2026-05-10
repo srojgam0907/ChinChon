@@ -22,6 +22,7 @@ public class GameEngine {
      * Constructor del motor de juego
      */
 	public GameEngine() {
+		discardPile= new DiscardPile();
 		players= new ArrayList<>();
 		currentPlayerIndex= 0;
 		gameOver= false;
@@ -52,7 +53,7 @@ public class GameEngine {
 		deck= new Deck(numDecks);
 		
 		for(int i=1; i <= numPlayers; i++) {
-			System.out.printf("Configurando jugador %d:\n", i);
+			System.out.printf("\nConfigurando jugador %d:\n", i);
 			System.out.println("Nombre: ");
 			name= ci.readStringNotEmpty();
 			
@@ -76,7 +77,7 @@ public class GameEngine {
      * Reparte 7 cartas a cada jugador y pone la primera en el descarte.
      */
 	public void setUpGame() {
-		System.out.println("Repartiendo cartas...");
+		System.out.println("Repartiendo cartas...\n");
 		for(Player p : players) {
 			for(int i=0; i<7; i++) {
 				deck.drawCard().ifPresent(card -> p.getHand().addCard(card));
@@ -116,11 +117,11 @@ public class GameEngine {
 	public void finish() {
 		int points;
 		
-		System.out.print("\n//////////// FIN DE LA RONDA ////////////\n");
+		System.out.print("\n//////////// FIN DE LA PARTIDA ////////////\n");
 		
 		for(Player p: players) {
 			points= CombinationChecker.calculateUncombinedPoints(p.getHand().getCards());
-			System.out.printf("\nJugador %s: %d puntos en cartas sueltas.\n", p.getName(), points);
+			System.out.printf("\nJugador %s: %d puntos.\n", p.getName(), points);
 		}
 		
 		showWinner();
@@ -172,6 +173,10 @@ public class GameEngine {
 			if (turnCounter >= players.size() && currentPlayer.hasClosed()) { //no se puede cerrar en la primera ronda
 				System.out.printf("\n %s ha cerrado la ronda\n", currentPlayer.getName());
 				gameOver= true;
+			}
+			
+			if(turnCounter < players.size()-1) {
+				System.out.print("\nEMPEZANDO EL SIGUIENTE TURNO\n");
 			}
 			
 			if(!gameOver) {
