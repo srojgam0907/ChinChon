@@ -1,6 +1,9 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import domain.*;
 
 /**
@@ -13,17 +16,60 @@ public class GameEngine {
 	private List<Player> players;
 	private int currentPlayerIndex;
 	private boolean gameOver;
+	private ConsoleInput ci;
 	
 	/**
-     * @param numberOfDecks Cantidad de barajas (1 o 2).
-     * @param players Lista de jugadores (Humanos e IAs) ya configurados.
+     * Constructor del motor de juego
      */
-	public GameEngine(int numberOfDecks, List<Player> players) {
-		deck= new Deck(numberOfDecks);
-		discardPile= new DiscardPile();
-		this.players= players;
+	public GameEngine() {
+		players= new ArrayList<>();
 		currentPlayerIndex= 0;
 		gameOver= false;
+		ci= ConsoleInput.getInstance(new Scanner(System.in));
+	}
+	
+	/**
+	 * Se configura el juego. El numero de jugadores, el numero de barajas,
+	 * los nombres de los jugadores y cuales son IAs.
+	 * @param players 
+	 * @return
+	 */
+	public void configurationGame() {
+		int numDecks= 0;
+		int numPlayers= 0;
+		String name;
+		boolean isAI;
+		
+		System.out.println("\n------------------------------------------");
+        System.out.println("   Empezando configuración...");
+        System.out.println("------------------------------------------\n");
+		
+        System.out.println("Podeis jugar hasta 5 jugadores y minimo 2, ¿Cuántos jugadores vais a ser?");
+        numPlayers= ci.readIntInRange(2, 5);
+        
+        System.out.println("\nPodeis jugar con 1 o 2 barajas, ¿Cuántas barajas quereis para jugar?");
+		numDecks= ci.readIntInRange(1, 2);
+		deck= new Deck(numDecks);
+		
+		for(int i=1; i <= numPlayers; i++) {
+			System.out.printf("Configurando jugador %d:\n", i);
+			System.out.println("Nombre: ");
+			name= ci.readStringNotEmpty();
+			
+			System.out.print("¿Es una IA? [S/N]: ");
+			isAI= ci.readBooleanUsingChar('s', 'n');
+			
+			if(isAI) {
+				players.add(new AIPlayer("IA " + name));
+				
+			} else {
+				players.add(new HumanPlayer(name));
+			}
+		}
+		
+		System.out.println("\n------------------------------------------");
+        System.out.println("   Configuración finalizada. Iniciando...");
+        System.out.println("------------------------------------------\n");
 	}
 	
 	/**
