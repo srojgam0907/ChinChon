@@ -3,6 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa a un jugador controlado por una IA
+ */
 public class AIPlayer extends Player{
 
 	/**
