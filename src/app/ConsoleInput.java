@@ -1,5 +1,6 @@
 package app;
 import java.util.*;
+import tema2_1_EscrituraEnPantalla.colores.Colors; 
 
 public class ConsoleInput {
 
@@ -30,7 +31,7 @@ public class ConsoleInput {
 	    		error= false;
 	    		
 	    	} catch (InputMismatchException e){
-	    		System.out.printf("ERROR. Rango válido: %d a %d. Intentalo otra vez", Integer.MIN_VALUE, Integer.MAX_VALUE);
+	    		System.out.printf("%sERROR. Rango válido: %d a %d. Intentalo otra vez%s\n", Colors.RED, Integer.MIN_VALUE, Integer.MAX_VALUE, Colors.RESET);
 	    		error= true;
 	    		
 	    	} finally {
@@ -51,7 +52,7 @@ public class ConsoleInput {
 			numInt = readInt();
 
 			if (numInt >= upperBound) {
-				System.out.println("ERROR, numero igual o mayor al indicado");
+				System.out.printf("%sERROR, numero igual o mayor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -71,7 +72,7 @@ public class ConsoleInput {
 			numInt = readInt();
 
 			if (numInt > upperBound) {
-				System.out.println("ERROR, numero mayor al indicado");
+				System.out.printf("%sERROR, numero mayor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -91,7 +92,7 @@ public class ConsoleInput {
 			numInt = readInt();
 
 			if (numInt <= lowerBound) {
-				System.out.println("ERROR, numero igual o menor al indicado");
+				System.out.printf("%sERROR, numero igual o menor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -111,7 +112,7 @@ public class ConsoleInput {
 			numInt = readInt();
 
 			if (numInt < lowerBound) {
-				System.out.println("ERROR, numero menor al indicado");
+				System.out.printf("%sERROR, numero menor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -130,7 +131,7 @@ public class ConsoleInput {
 			numInt = readInt();
 
 			if (numInt < lowerBound || numInt > upperBound) {
-				System.out.printf("ERROR, numero fuera de rango. Introduce un numero entre %d y %d", lowerBound, upperBound);
+				System.out.printf("%sERROR, numero fuera de rango. Introduce un numero entre %d y %d%s\n", Colors.RED, lowerBound, upperBound, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -151,7 +152,7 @@ public class ConsoleInput {
 	    		error= false;
 	    		
 	    	} catch (InputMismatchException e){
-	    		System.out.printf("ERROR. Rango válido: %f a %f. Intentalo otra vez", Double.MIN_VALUE, Double.MAX_VALUE);
+	    		System.out.printf("%sERROR. Rango válido: %f a %f. Intentalo otra vez%s\n", Colors.RED, Double.MIN_VALUE, Double.MAX_VALUE, Colors.RESET);
 	    		error= true;
 	    		 
 	    	} finally {
@@ -172,7 +173,7 @@ public class ConsoleInput {
 			numDouble = readDouble();
 
 			if (numDouble >= upperBound) {
-				System.out.println("ERROR, numero igual o mayor al indicado");
+				System.out.printf("%sERROR, numero igual o mayor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -192,7 +193,7 @@ public class ConsoleInput {
 			numDouble = readDouble();
 
 			if (numDouble > upperBound) {
-				System.out.println("ERROR, numero mayor al indicado");
+				System.out.printf("%sERROR, numero mayor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -212,7 +213,7 @@ public class ConsoleInput {
 			numDouble = readDouble();
 
 			if (numDouble <= lowerBound) {
-				System.out.println("ERROR, numero igual o menor al indicado");
+				System.out.printf("%sERROR, numero igual o menor al indicado%s\n", Colors.RED, Colors.RESET); 
 				error = true;
 
 			} else {
@@ -232,7 +233,7 @@ public class ConsoleInput {
 			numDouble = readDouble();
 
 			if (numDouble < lowerBound) {
-				System.out.println("ERROR, numero menor al indicado");
+				System.out.printf("%sERROR, numero menor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -252,7 +253,7 @@ public class ConsoleInput {
 			numDouble = readDouble();
 
 			if (numDouble < lowerBound || numDouble > upperBound) {
-				System.out.println("ERROR, numero fuera de rango");
+				System.out.printf("%sERROR, numero fuera de rango%s\n", Colors.RED, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -273,7 +274,7 @@ public class ConsoleInput {
 	    		error= false;
 	    		
 	    	} catch (InputMismatchException e){
-	    		System.out.printf("ERROR. Rango válido: %d a %d. Intentalo otra vez", Float.MIN_VALUE, Float.MAX_VALUE);
+	    		System.out.printf("%sERROR. Rango válido: %d a %d. Intentalo otra vez%s\n",  Colors.RED, Float.MIN_VALUE, Float.MAX_VALUE, Colors.RESET);
 	    		error= true;
 	    		
 	    	} finally {
@@ -294,7 +295,7 @@ public class ConsoleInput {
 			numFloat = readFloat(); 
 
 			if (numFloat >= upperBound) {
-				System.out.println("ERROR, numero igual o mayor al indicado");
+				System.out.printf("%sERROR, numero igual o mayor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -314,7 +315,7 @@ public class ConsoleInput {
 			numFloat = readFloat(); 
 
 			if (numFloat > upperBound) {
-				System.out.println("ERROR, numero mayor al indicado");
+				System.out.printf("%sERROR, numero mayor al indicad%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -334,7 +335,7 @@ public class ConsoleInput {
 			numFloat = readFloat(); 
 
 			if (numFloat <= lowerBound) {
-				System.out.println("ERROR, numero igual o menor al indicado");
+				System.out.printf("%sERROR, numero igual o menor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 
 			} else {
@@ -354,7 +355,7 @@ public class ConsoleInput {
 			numFloat = readFloat(); 
 
 			if (numFloat < lowerBound) {
-				System.out.println("ERROR, numero menor al indicado");
+				System.out.printf("%sERROR, numero menor al indicado%s\n", Colors.RED, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -374,7 +375,7 @@ public class ConsoleInput {
 			numFloat = readFloat(); 
 
 			if (numFloat < lowerBound || numFloat > upperBound) {
-				System.out.println("ERROR, numero fuera de rango");
+				System.out.printf("%sERROR, numero fuera de rango%s\n", Colors.RED, Colors.RESET);
 				error = true;
 				
 			} else {
@@ -397,7 +398,7 @@ public class ConsoleInput {
     		
     		} else {
     			error= true;
-    			System.out.println("ERROR. Has introducido más de un caracter");
+    			System.out.printf("%sERROR. Has introducido más de un caracter%s\n", Colors.RED, Colors.RESET);
     		}
 
     	}while(error);
@@ -416,7 +417,7 @@ public class ConsoleInput {
     		
     		} else {
     			error= true;
-    			System.out.printf("ERROR. Debe ser una letra. Intentalo otra vez.");
+    			System.out.printf("%sERROR. Debe ser una letra. Intentalo otra vez.%s\n", Colors.RED, Colors.RESET);
     		}
 
     	}while(error);
@@ -440,7 +441,7 @@ public class ConsoleInput {
     		text.trim();
     		
     		if(text.isEmpty()) {
-    			System.out.println("La cadena de texto no puede estar vacía. Intetnelo otra vez");
+    			System.out.printf("%sLa cadena de texto no puede estar vacía. Intentelo otra vez%s\n", Colors.RED, Colors.RESET);
     			error= true;
     			
     		} else {
@@ -461,7 +462,7 @@ public class ConsoleInput {
         	
         	if(text.length() > maxLenght) {
         		error= true;
-        		System.out.println("ERROR. Has sobrepasado el limite");
+        		System.out.printf("%sERROR. Has sobrepasado el limite%s\n", Colors.RED, Colors.RESET);
         		
         	} else {
         		error= false;
@@ -486,7 +487,7 @@ public class ConsoleInput {
     		
     		} else {
     			error= true;
-    			System.out.printf("ERROR. Introduce %c o %c\n", affirmativeValue, negativeValue);
+    			System.out.printf("%sERROR. Introduce %c o %c%s\n",  Colors.RED,affirmativeValue, negativeValue, Colors.RESET);
     		}
     		
     	} while(error);
