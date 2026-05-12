@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import tema2_1_EscrituraEnPantalla.colores.Colors;
+
 /**
  * Representa la mano de un jugador en el juego del Chinchón.
  * Gestiona un conjunto de 7 cartas (u 8 durante el turno) y contiene la lógica
@@ -122,7 +124,7 @@ public class Hand {
     public String toString() {
         StringBuilder sb = new StringBuilder("Tu mano:\n");
         for (int i = 0; i < cards.size(); i++) {
-            sb.append(String.format("[%d] %s", i+1, cards.get(i))); 
+            sb.append(String.format("%s[%d]%s %s",Colors.CYAN_BRIGHT, i+1, Colors.RESET, cards.get(i))); 
             
             if(i < cards.size() -1) {
             	sb.append(", "); 

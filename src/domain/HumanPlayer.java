@@ -3,7 +3,8 @@ package domain;
 import java.util.Scanner;
 
 import app.ConsoleInput;
-
+import tema2_1_EscrituraEnPantalla.colores.Colors;
+ 
 /**
  * Representa a un jugador controlado por un humano.
  */
@@ -22,7 +23,7 @@ public class HumanPlayer extends Player{
 
 	@Override
 	public void playTurn(Deck deck, DiscardPile discardPile) {
-		System.out.printf("\n>>> TURNO DE: %s\n\n", name); 
+		System.out.printf("\n%s>>>%s TURNO DE: %s\n\n", cyan, reset, name);
 		
 		//ESTADO ACTUAL
         System.out.println(discardPile.toString());
@@ -36,7 +37,7 @@ public class HumanPlayer extends Player{
         
 		// DESCARTE o CIERRE
 		if (hand.canClose()) {
-			System.out.print("\n¡Puedes cerrar¡ ¿Quieres cerrar? [S/N]: ");
+			System.out.printf("\n%s¡Puedes cerrar¡ ¿Quieres cerrar? [S/N]: %s\n", blue, reset);
 
 			if (ci.readBooleanUsingChar('s', 'n')) {
 				executeCloseDiscard(discardPile);
@@ -59,7 +60,7 @@ public class HumanPlayer extends Player{
 		boolean choice;
 		
         while(!drawn) {
-        	System.out.print("\n¿Robas del [D]escarte o del [M]azo?: ");
+        	System.out.printf("\n%s¿Robas del [D]escarte o del [M]azo?: %s", blue, reset);
         	choice= ci.readBooleanUsingChar('d', 'm'); //d = true, m = false
         	
         	if(choice) {
@@ -68,7 +69,7 @@ public class HumanPlayer extends Player{
         			drawn= true;
         		
         		} else {
-        			System.out.println("\nLa pila de descartes está vacía. Por favor elije el mazo");
+        			System.out.printf("\n%sLa pila de descartes está vacía. Por favor elije el mazo%s\n", Colors.PURPLE_BRIGHT, reset);
         		}
         		
         	} else {
@@ -84,13 +85,13 @@ public class HumanPlayer extends Player{
 	private void executeNormalDiscard(DiscardPile discardPile) {
 		int cardPosition;
 		
-		System.out.print("\nElige la posición de la carta que quieres descartar: ");
+		System.out.printf("\n%sElige la posición de la carta que quieres descartar: %s\n", blue, reset);
     	cardPosition= ci.readIntInRange(1, hand.size());
     	
     	Card c= hand.discardCard(cardPosition -1);
     	discardPile.pushCard(c);
     	
-    	System.out.println("Has descartado: " + c.toString());
+    	System.out.println("\nHas descartado: " + c.toString());
 	}
 	
 	/**
@@ -101,7 +102,7 @@ public class HumanPlayer extends Player{
 		int cardPosition;
 		Card card;
 		
-		System.out.println("\nSelecciona la carta que vas a soltar (según su numero de posicion): ");
+		System.out.printf("\n%sSelecciona la carta que vas a soltar (según su numero de posicion): %s\n", blue, reset);
 		cardPosition= ci.readIntInRange(1, hand.size());
 		
 		card= hand.discardCard(cardPosition -1);

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import domain.*;
+import tema2_1_EscrituraEnPantalla.colores.Colors;
 
 /**
  * Motor principal que controla el flujo de la partida.
@@ -41,23 +42,23 @@ public class GameEngine {
 		String name;
 		boolean isAI;
 		
-		System.out.println("\n------------------------------------------");
-        System.out.println("   Empezando configuración...");
-        System.out.println("------------------------------------------\n");
+		System.out.printf("\n%s------------------------------------------%s\n", Colors.GREEN, Colors.RESET);
+        System.out.printf("%s   Empezando configuración...%s\n", Colors.GREEN, Colors.RESET);
+        System.out.printf("%s------------------------------------------%s\n", Colors.GREEN, Colors.RESET);
 		
-        System.out.println("Podeis jugar hasta 5 jugadores y minimo 2, ¿Cuántos jugadores vais a ser?");
-        numPlayers= ci.readIntInRange(2, 5);
+        System.out.printf("\n%sPodeis jugar hasta 5 jugadores y minimo 2, ¿Cuántos jugadores vais a ser?%s\n", Colors.BLUE_BRIGHT, Colors.RESET);
+        numPlayers= ci.readIntInRange(2, 5); 
         
-        System.out.println("\nPodeis jugar con 1 o 2 barajas, ¿Cuántas barajas quereis para jugar?");
+        System.out.printf("\n%sPodeis jugar con 1 o 2 barajas, ¿Cuántas barajas quereis para jugar?%s\n", Colors.BLUE_BRIGHT, Colors.RESET); 
 		numDecks= ci.readIntInRange(1, 2);
 		deck= new Deck(numDecks);
 		
 		for(int i=1; i <= numPlayers; i++) {
-			System.out.printf("\nConfigurando jugador %d:\n", i);
-			System.out.println("Nombre: ");
+			System.out.printf("\n%sConfigurando jugador %d:\n", Colors.BLUE_BRIGHT, i);
+			System.out.printf("%sNombre: %s", Colors.BLUE_BRIGHT, Colors.RESET);
 			name= ci.readStringNotEmpty();
 			
-			System.out.print("¿Es una IA? [S/N]: ");
+			System.out.printf("\n%s¿Es una IA? [S/N]: %s", Colors.BLUE_BRIGHT, Colors.RESET);
 			isAI= ci.readBooleanUsingChar('s', 'n');
 			
 			if(isAI) {
@@ -68,16 +69,16 @@ public class GameEngine {
 			}
 		}
 		
-		System.out.println("\n------------------------------------------");
-        System.out.println("   Configuración finalizada. Iniciando...");
-        System.out.println("------------------------------------------\n");
+		System.out.printf("\n%s------------------------------------------%s\n", Colors.GREEN, Colors.RESET);
+        System.out.printf("%s   Configuración finalizada. Iniciando...%s\n", Colors.GREEN, Colors.RESET);
+        System.out.printf("%s------------------------------------------%s\n", Colors.GREEN, Colors.RESET);
 	}
 	
 	/**
      * Reparte 7 cartas a cada jugador y pone la primera en el descarte.
      */
 	public void setUpGame() {
-		System.out.println("Repartiendo cartas...\n");
+		System.out.printf("\n%sRepartiendo cartas...%s\n", Colors.YELLOW, Colors.RESET);
 		for(Player p : players) {
 			for(int i=0; i<7; i++) {
 				deck.drawCard().ifPresent(card -> p.getHand().addCard(card));
@@ -92,7 +93,7 @@ public class GameEngine {
 	 */
 	private void checkDeckStatus() {
 		if(deck.isEmpty()) {
-			System.out.println("\nMazo vacío. Barajando la pila de descartes...");
+			System.out.printf("\n%sMazo vacío. Barajando la pila de descartes...%s", Colors.PURPLE_BRIGHT, Colors.RESET); 
 			List<Card> recycledCards= discardPile.collectAllButLast();
 			deck.refillFromDiscardPile(recycledCards);
 		}
@@ -117,11 +118,11 @@ public class GameEngine {
 	public void finish() {
 		int points;
 		
-		System.out.print("\n//////////// FIN DE LA PARTIDA ////////////\n");
+		System.out.printf("\n%s//////////// FIN DE LA PARTIDA ////////////%s\n", Colors.YELLOW_BRIGHT, Colors.RESET);
 		
 		for(Player p: players) {
 			points= CombinationChecker.calculateUncombinedPoints(p.getHand().getCards());
-			System.out.printf("\nJugador %s: %d puntos.\n", p.getName(), points);
+			System.out.printf("\n%sJugador %s:%s %d puntos.\n", Colors.BOLD, p.getName(), Colors.RESET, points);
 		}
 		
 		showWinner();
@@ -147,7 +148,12 @@ public class GameEngine {
 			}
 		}
 		
-		System.out.printf("\n------------------------------\n¡EL GANADOR ES %s CON %d PUNTOS!\n------------------------------\n", winner.getName().toUpperCase(), minPoints);
+		if(minPoints <= 1) {
+			System.out.printf("\n%s------------------------------\n¡EL GANADOR ES %s CON %d PUNTO!\n------------------------------%s\n", Colors.YELLOW_BRIGHT, winner.getName().toUpperCase(), minPoints, Colors.RESET);
+
+		} else {
+			System.out.printf("\n%s------------------------------\n¡EL GANADOR ES %s CON %d PUNTOS!\n------------------------------%s\n", Colors.YELLOW_BRIGHT, winner.getName().toUpperCase(), minPoints, Colors.RESET);
+		}
 	}
 	
 	/**
@@ -157,29 +163,32 @@ public class GameEngine {
 	public void startGame() {
 		Player currentPlayer; 
 		int turnCounter= 0;
+		int turnCounterPerRound= 0;
 		int round= 1;
 		
-		System.out.println("¡COMENCEMOS LA PARTIDA!");
+		System.out.printf("\n%s¡COMENCEMOS LA PARTIDA!%s\n", Colors.YELLOW, Colors.RESET);
 		
 		while(!gameOver) {
 			currentPlayer= players.get(currentPlayerIndex);
 			
 			if(currentPlayerIndex == 0) {
-				System.out.printf("\nRONDA %d", round); 
+				System.out.printf("\n%sRONDA %d%s\n", Colors.GREEN, round, Colors.RESET); 
 			}
 			
 			currentPlayer.playTurn(deck, discardPile);
 			
 			if (turnCounter >= players.size() && currentPlayer.hasClosed()) { //no se puede cerrar en la primera ronda
-				System.out.printf("\n %s ha cerrado la ronda\n", currentPlayer.getName());
+				System.out.printf("\n%s%s ha cerrado la ronda%s\n", Colors.BLUE_BRIGHT, currentPlayer.getName(), Colors.RESET);
 				gameOver= true;
 			}
 			
-			if(turnCounter < players.size()-1) {
-				System.out.print("\nEMPEZANDO EL SIGUIENTE TURNO\n");
+			if(turnCounterPerRound < players.size()-1 && !gameOver) {
+				System.out.printf("\n%sEMPEZANDO EL SIGUIENTE TURNO%s\n", Colors.YELLOW, Colors.RESET);
+				turnCounterPerRound++;
 				
-			} else {
-				System.out.print("\nEMPEZANDO LA SIGUIENTE RONDA\n");
+			} else if(turnCounterPerRound == players.size()-1 && !gameOver){
+				System.out.printf("\n%sEMPEZANDO LA SIGUIENTE RONDA%s\n",  Colors.YELLOW, Colors.RESET);
+				turnCounterPerRound= 0;
 			}
 			
 			if(!gameOver) {

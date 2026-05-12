@@ -24,7 +24,7 @@ public class AIPlayer extends Player{
 		int discardPoints;
 		int finalPoints;
 		
-		System.out.printf("\n>>> TURNO DE: %s\n", name); 
+		System.out.printf("\n%s>>>%s TURNO DE: %s\n\n", cyan, reset, name);
 		
 		//ROBO
 		if(!discardPile.isEmpty()) {
@@ -78,7 +78,6 @@ public class AIPlayer extends Player{
 			
 			if(finalPoints <= 3) {
 				hasClosed= true;
-				System.out.printf("\n%s ha cerrado la ronda\n", name);
 			}
 		}
 	}

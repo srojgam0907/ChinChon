@@ -1,5 +1,7 @@
 package domain;
 
+import tema2_1_EscrituraEnPantalla.colores.Colors;
+
 /**
  * Clase abstracta que representa a un jugador en la partida.
  * Define los atributos comunes como el nombre, la mano y la puntuación,
@@ -11,6 +13,9 @@ public abstract class Player {
 	  protected Hand hand;
 	  protected int totalScore;
 	  protected boolean hasClosed;
+	  protected String blue= Colors.BLUE_BRIGHT;
+	  protected String reset= Colors.RESET;
+	  protected String cyan= Colors.CYAN_BRIGHT;
 	  
 	  /**
 	   * Constructor base para cualquier jugador.
