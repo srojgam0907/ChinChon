@@ -145,15 +145,21 @@ Utilizado en DeckFactory. Centraliza la lógica de creación de la baraja españ
 
 ### De caja blanca
 
-
+- **Lógica de Combinaciones:** Me aseguré de que los algoritmos de la clase CombinationChecker no dejaran cabos sueltos. Por ejemplo, en las escaleras, comprobé que el código revisa paso a paso que todas las cartas sean del mismo palo y que los números vayan uno detrás de otro sin saltos.
+  
+- **Inteligencia Artificial:** Comprobé paso a paso cómo la IA toma sus decisiones. Me aseguré de que realmente compare todas sus cartas antes de descartar y que siempre elija la opción que le deje menos puntos, confirmando que el flujo del algoritmo es lógico y eficiente.
 
 ### De caja negra
 
+- **Entrada de Datos:** Probé el sistema metiendo datos que no tienen sentido para ver cómo reaccionaba. Por ejemplo, intenté poner letras donde pedía números de jugadores, puse que quería jugar con 5 barajas o cuando pregunta si quieres robar del [M]azo o del [D]escarte escribi la letra A. El resultado fue que el programa aguantó perfectamente; en lugar de cerrarse con un error, se dio cuenta del fallo, me avisó y me pidió el dato otra vez.
 
+- **Flujo del Turno:** Verifiqué que el ciclo de juego fuera fluido. Si robas una carta, aparece en tu mano; si descartas, se va a la pila. Comprobé que el juego hace exactamente lo que el usuario espera que pase en cada paso.
 
 ### Unitarias
 
+Se han realizado test para comprobar la correcta funcionalidad de los metodos de CombinationChecker. Comprobando los tríos, las escaleras, el chinchon y los puntos combinados y sin combinar. 
 
+[Ver Test](src/test/CombinationCheckerTest.java)
 
 ## UML
 
