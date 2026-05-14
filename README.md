@@ -163,5 +163,5 @@ Se han realizado test para comprobar la correcta funcionalidad de los metodos de
 
 ## UML
 
-[UML](uml.jpg)
+![UML](uml-Chinchon.drawio.png)
 
