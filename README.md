@@ -38,6 +38,39 @@ Cuando uno de los jugadores cierre la partida, se contarán todos los puntos y e
 - Si un jugador consigue un chinchón, gana automáticamente con -10 puntos
 - Cuando uno de los jugadores llega a los 100 puntos, se cierra automáticamente la partida y se anuncia al ganador
 
+## Estructura
+
+    Chinchon/
+    |-- src/
+    |   |-- app/
+    |   |   |-- ConsoleInput.java
+    |   |   |-- GameEngine.java
+    |   |   |-- Main.java
+    |   |
+    |   |-- domain/
+    |   |   |-- AIPlayer.java
+    |   |   |-- Card.java
+    |   |   |-- CombinationChecker.java
+    |   |   |-- Deck.java
+    |   |   |-- DeckFactory.java
+    |   |   |-- DiscardPile.java
+    |   |   |-- Hand.java
+    |   |   |-- HumanPlayer.java
+    |   |   |-- Player.java
+    |   |   |-- Suit.java
+    |   |   |-- Value.java
+    |
+    |-- test/
+    |   |-- test/
+    |   |   |-- CombinationCheckerTest.java
+    |
+    |-- assets/
+    |   |-- uml-Chinchon.drawio.pdf
+    |   |-- uml-Chinchon.drawio.png
+    |   |-- ejecucionTest.png
+    |
+    |-- README.md
+
 ## Clases 📑
 
 ### Paquete app
@@ -157,11 +190,15 @@ Utilizado en DeckFactory. Centraliza la lógica de creación de la baraja españ
 
 ### Unitarias
 
-Se han realizado test para comprobar la correcta funcionalidad de los metodos de CombinationChecker. Comprobando los tríos, las escaleras, el chinchon y los puntos combinados y sin combinar. 
+Se han realizado test para comprobar la correcta funcionalidad de los metodos de CombinationChecker. Comprobando los tríos, las escaleras, el chinchon y los puntos combinados y sin combinar.
 
-[Ver Test](src/test/CombinationCheckerTest.java)
+[Ver Código Test](src/test/CombinationCheckerTest.java)
+
+**Ejecución de los test**
+
+![Test](assets/ejecucionTest.png)
 
 ## UML
 
-![UML](uml-Chinchon.drawio.png)
+![UML](assets/uml-Chinchon.drawio.png)
 
