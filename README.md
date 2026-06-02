@@ -38,7 +38,37 @@ Cuando uno de los jugadores cierre la partida, se contarán todos los puntos y e
 - Si un jugador consigue un chinchón, gana automáticamente con -10 puntos
 - Cuando uno de los jugadores llega a los 100 puntos, se cierra automáticamente la partida y se anuncia al ganador
 
-## Estructura
+# Ejemplo de Jugada 
+
+**Bienvenida y configuración**
+
+Muestra la bienvenida y la configuracion del juego. Puedes configurar la cantidad de jugadores que vais a jugar la partida, la cantidad de barajas que vais a usar, el nombre de los jugadores y si son IAs o no.
+
+![configuracion](assets/configuracion.png)
+
+**Ejemplo de ronda jugada**
+
+Primero muestra el principio de la partida cuando se reparten las cartas la primera vez y luego empieza la partida. A continuación, muestra el numero de la ronda que se esta jugando y a quién le corresponde el turno. 
+
+En el caso del turno del Jugador Humano, le enseña la carta disponible en el descarte y la mano que tiene disponible para jugar, le pregunta de donde quiere robar y luego vuelve a mostrar la mano y pregunta que carta quiere descartar.
+
+En el caso del turno de la IA, solo muestra por pantalla de donde ha robado y que carta a descartado ya que la IA hace su jugada automaticamente.
+
+![ejemplo de ronda](assets/ejemploRonda.png)
+
+**Control de errores**
+
+El juego contempla un control de errores hacia el usuario. Por ejemplo, cuando te pregunta de donde quieres robar, controla que se escriba una d o una m y si escribes cualquier otro caracter informa al usuario del error y da la opcion de volver a escribirlo.
+
+![control de errores](assets/controlErrores.png)
+
+**Cierre y ganador**
+
+Se informa por pantalla quien ha cerrado la partida, se muestran los puntos de cada jugador y quien ha ganado la partida.
+
+![cierre y ganador](assets/cierrePartida.png)
+
+## Estructura del proyecto
 
     Chinchon/
     |-- src/
@@ -68,6 +98,10 @@ Cuando uno de los jugadores cierre la partida, se contarán todos los puntos y e
     |   |-- uml-Chinchon.drawio.pdf
     |   |-- uml-Chinchon.drawio.png
     |   |-- ejecucionTest.png
+    |   |-- cierrePartida.png
+    |   |-- controlErrores.png
+    |   |-- ejemploRonda.png
+    |   |-- configuracion.png
     |
     |-- README.md
 
